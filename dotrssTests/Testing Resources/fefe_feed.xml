@@ -1,0 +1,131 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+
+<channel>
+<title>Fefes Blog</title>
+<link>http://blog.fefe.de/</link>
+<description>Verschwörungen und Obskures aus aller Welt</description>
+<language>de</language>
+<item>
+<title>Wer dachte, im FAZ-Politikteil sei schon mit Jasper von Altenbockum das tiefste denkbare Niveau erreicht, für den habe ich ein Leckerli: "Die Russen sind an Al Kaida Schuld!1!!Von einem Mann, dessen Namen man sich wird merken müssen.  Rainer Hermann.  Nicht die CIA hat die Mudschaheddin gegründet und mit Waffen versorgt, nein, das war alles Schuld der Russen.  Wenn die Russen nicht aggressiv einmarschiert wären, wäre da unten Frieden!1!Der Mann stellt da eine fraktal falsche Dolchstoßlegende auf, da treibt es einem die Tränen in die Augen.Unglaublich.</title>
+<link>http://blog.fefe.de/?ts=ada54c06</link>
+<guid>http://blog.fefe.de/?ts=ada54c06</guid>
+</item>
+
+<item>
+<title>Habt ihr das auch gehört?  Dass Radioaktivität total gut für Umwelt und Gesundheit ist?  Nehmt nur mal die Vögel bei Tschernobyl!Und nicht nur das: Auf einige Vögel scheint die Strahlung gar positiv zu wirken, berichten Forscher im Fachjournal "Functional Ecology". Die Tiere seien größer und hätten weniger Erbgutschäden als ihre Artgenossen in weniger belasteten Gebieten.Wir sollten uns alle mal ein bisschen verstrahlen lassen!1!!</title>
+<link>http://blog.fefe.de/?ts=ada43745</link>
+<guid>http://blog.fefe.de/?ts=ada43745</guid>
+</item>
+
+<item>
+<title>Bug des Tages:"When the screen is locked with password, if I hold ENTER after some seconds the screen freezes and the lock screen crashes. After that I have the computer fully unlocked.</title>
+<link>http://blog.fefe.de/?ts=ada419aa</link>
+<guid>http://blog.fefe.de/?ts=ada419aa</guid>
+</item>
+
+<item>
+<title>Die USA schaffen dann mal Netzneutralität nicht nur faktisch sondern auch offiziell ab.  War leider nicht anders zu erwarten, denn der neue Chef der FCC ist ein Lobbyist für Kabel-TV-Firmen und Telcos.  Wieso ist der überhaupt FCC-Chef geworden?  Na Korruption natürlich, äh, ich meine, Wahlkampfspenden an Obama!</title>
+<link>http://blog.fefe.de/?ts=ada4a164</link>
+<guid>http://blog.fefe.de/?ts=ada4a164</guid>
+</item>
+
+<item>
+<title>S&amp;P wertet Russlands Kreditwürdigkeit als knapp über Ramschniveau.  Ein Glück, dass S&amp;P völlig unabhängig und keinesfalls von der US-Regierung gesteuert wird.  Das wäre ja ein veritabler Wirtschaftskrieg sonst!1!!</title>
+<link>http://blog.fefe.de/?ts=ada496d7</link>
+<guid>http://blog.fefe.de/?ts=ada496d7</guid>
+</item>
+
+<item>
+<title>Aus der beliebten Reihe "bei UNS ist Kernkraft SICHER": Rauchwolken über dem AKW Fessenheim.Ursache sei kein Feuer gewesen, sondern ein Problem mit einem Sicherungsschalter in einem Nebengebäude des Maschinenraums von Block ein.Ich bin mir sicher, dass keine Gefahr für Anwohner und Mitarbeiter besteht.</title>
+<link>http://blog.fefe.de/?ts=ada49225</link>
+<guid>http://blog.fefe.de/?ts=ada49225</guid>
+</item>
+
+<item>
+<title>Der "ARD-ZDF-Beitragsservice" scheint systematisch außergerichtliche Einigungen bei Privatinsolvenzen zu verhindern.Bevor Menschen in die Privatinsolvenz gehen, versuchen die VSE-Berater in den allermeisten Fällen zunächst eine außergerichtliche Einigung mit den Gläubigern. Sagt nur einer Nein, scheitert das Vorhaben. Bemerkenswert: Ausgerechnet der „ARD-ZDF Beitragsservice“ gehört laut Huber zu den Gläubigern, die sich nie auf eine Ratenzahlung einlassen.Na ganz toll.Update: Hier gingen diverse Mails ein.  Einige bestätigen das, andere haben es anders erlebt.  Ich schließe daraus, dass das regional unterschiedlich ist.</title>
+<link>http://blog.fefe.de/?ts=ada4927b</link>
+<guid>http://blog.fefe.de/?ts=ada4927b</guid>
+</item>
+
+<item>
+<title>Fnord des Tages: Berliner Stadtreinigung ruft zur öffentlichen Sperrmüllsammlung auf.  Leider nur ist das Schreiben gefälscht, die BSR dementiert.Update: Mir erklärt gerade jemand, dass das eine alte Antifa-Strategie ist, so ne Woche vor einem Naziaufmarsch, damit sie genug Material für Barrikaden auf den Straßen haben.</title>
+<link>http://blog.fefe.de/?ts=ada48b8c</link>
+<guid>http://blog.fefe.de/?ts=ada48b8c</guid>
+</item>
+
+<item>
+<title>Es gab in den letzten 12 Monaten ein paar spektakuläre Untersuchungen von großen Mengen an Crypto-Schlüsseln, u.a. aus dem Internet gesammelt oder von von einem Land ausgeteilten Smartcards und so.  Das war bisher für RSA, und da haben sich möglicherweise die Anhänger von elliptischen Kurven gedacht, bei ihnen sei das alles besser.  Hier ist ein Paper, wo ein paar Forscher so etwas mal für elliptische Kurven gemacht haben, und zwar bei TLS, SSH, Bitcoin und bei österreichischen elektronischen Personalausweisen.  Die Ergebnisse sind haarsträubend.  Besonders bei Bitcoin.  Da haben sie nämlich doppelte Nonces gefunden (eine Nonce ist eine Zahl, den man nur einmal benutzt), und darüber ließen sich die private keys rekonstruieren.  Allerdings waren die Accounts schon leergeräumt.  Und dann fanden sie einen Account, der von 10 dieser Accounts Geld gestohlen zu haben scheint, und zwar insgesamt 59 Bitcoins oder umgerechnet 12000 Dollar.</title>
+<link>http://blog.fefe.de/?ts=ada71b5e</link>
+<guid>http://blog.fefe.de/?ts=ada71b5e</guid>
+</item>
+
+<item>
+<title>Das Department of Homeland Security will jetzt ein Schulfach "Homeland Security" einführen.The course will be overseen and shaped by the Homeland Security Advisory Committee, a group consisting of government, academia and private sector employees who provide information and security-related recommendations to the DHS secretary. Of the many requirements, applicants are informed of their duty to meet with the committee on a regular basis."Staatsbürgerkunde" hätte man das in der DDR wohl genannt.Update: Nicht Staatsbürgerkunde, "Zivilverteidigung".</title>
+<link>http://blog.fefe.de/?ts=ada7ffbe</link>
+<guid>http://blog.fefe.de/?ts=ada7ffbe</guid>
+</item>
+
+<item>
+<title>1. Akt: Die Polizei so: Wir brauchen einen Feature, um gestohlene Mobiltelefone aus der Ferne löschen zu können!2. Akt: Die Polizei so: Jetzt können die Leute ihre Telefone aus der Ferne löschen, also brauchen wir verdeckten Zugriff auf die Telefone, am besten ohne Richteranordnung. Denn wenn die Leute merken, dass wir ihre Telefone ausspähen, dann löschen sie die ja aus der Ferne!1!!</title>
+<link>http://blog.fefe.de/?ts=ada7fe9b</link>
+<guid>http://blog.fefe.de/?ts=ada7fe9b</guid>
+</item>
+
+<item>
+<title>PSA: Wegen einer renitenten Nervbacke mit viel zu stark ausgeprägtem Mitteilungsbedürfnis werden hier bis auf weiteres Mixmaster-Emails geblockt.</title>
+<link>http://blog.fefe.de/?ts=ada7e42c</link>
+<guid>http://blog.fefe.de/?ts=ada7e42c</guid>
+</item>
+
+<item>
+<title>Aha!  Und es bewegt sich doch was!  Die Linux Foundation ist mal rumgelaufen, Fördermittel für Open Source einsammeln.Founding backers of the Initiative include Amazon Web Services, Cisco, Dell, Facebook, Fujitsu, Google, IBM, Intel, Microsoft, NetApp, Rackspace, VMware and The Linux Foundation.Yeah!Update: Ich höre gerade aus gewöhnlich gut informierten Quellen, dass sich OpenBSD bei der Linux Foundation um diese Kohle bewirbt :-)</title>
+<link>http://blog.fefe.de/?ts=ada7dc48</link>
+<guid>http://blog.fefe.de/?ts=ada7dc48</guid>
+</item>
+
+<item>
+<title>Ich höre gerade, dass es sich in diesem Wahlkampf erstmals lohnen könnte, QR-Codes auf Wahlplakaten zu folgen :-)</title>
+<link>http://blog.fefe.de/?ts=ada7d65b</link>
+<guid>http://blog.fefe.de/?ts=ada7d65b</guid>
+</item>
+
+<item>
+<title>Aus der beliebten Kategorie "bei UNS ist Kernkraft SICHER": AKW Krümmel verliert nach Blitzschlag die Stromversorgung.Und beim AKW Brokdorf gab es einen Kurzschluss.Update: Ich verstehe gerade nicht, wieso ich keine Paywall kriege.  Nanu?  Wenn ihr eine kriegt, tut mir das leid. :)</title>
+<link>http://blog.fefe.de/?ts=ada7cb8b</link>
+<guid>http://blog.fefe.de/?ts=ada7cb8b</guid>
+</item>
+
+<item>
+<title>Wer hat uns verraten?  Die Sozialdemokraten! Die Vorratsdatenspeicherung wird zum Streitthema zwischen Bund und Ländern. Während Bundespolitiker immer weiter von dieser Art der Verbrechensbekämpfung abrücken, sprechen Landespolitiker von einem „Verfolgungsvakuum“.</title>
+<link>http://blog.fefe.de/?ts=ada63964</link>
+<guid>http://blog.fefe.de/?ts=ada63964</guid>
+</item>
+
+<item>
+<title>Klarer Fall von "lagebedingtem Erstickungstod"</title>
+<link>http://blog.fefe.de/?ts=ada6368c</link>
+<guid>http://blog.fefe.de/?ts=ada6368c</guid>
+</item>
+
+<item>
+<title>Der US Supreme Court erklärten Michigans Verbot für "affirmative action" für in Ordnung.  Affirmative action ist die gezielte Bevorzugung von Minderheiten oder Benachteiligten, also z.B. von Schwarzen und Latinos.  Hintergrund der Regelung in Michigan war ein Volksentscheid.  Den wollte der Supreme Court nicht für unzulässig erklären.Ich halte bei solchen Regelungen für eines der Hauptprobleme, dass es so schwierig ist, irgendwann wieder damit aufzuhören.  Exemplarisch kann man das an der Mädchenförderungen an deutschen Schulen beobachten, wo jetzt Jungen in der Bildung klar benachteiligt werden.  Und an Unis kann sowas am Ende auch die Minderheiten benachteiligen, die so reingekommen sind, denn wenn die sich irgendwo bewerben, dann denkt sich die HR-Abteilung, dass der Bewerber der Abschluss gar nicht verdient hat und nimmt lieber jemanden, der nicht aus einer Minderheit kommt.  Auch der Geförderte selbst weiß nie, ob er gerade eine gute Zensur kriegt, weil er gut war, oder weil man ihn fördern will.  Das muss einen doch total fertig machen!</title>
+<link>http://blog.fefe.de/?ts=ada68273</link>
+<guid>http://blog.fefe.de/?ts=ada68273</guid>
+</item>
+
+<item>
+<title>Wie kommt es eigentlich, dass unschuldige Menschen auf der No-Fly-Liste landen?  Das ist ein Anwerbeversuch des FBI.  "Schönes Flugticket haben Sie da!  Wäre doch schade, wenn dem was zustöße!Die haben schon so viele Undercover-Spitzel, dass sie schon zu solchen Methoden greifen müssen, um noch mehr anzuwerben!</title>
+<link>http://blog.fefe.de/?ts=ada6dc2c</link>
+<guid>http://blog.fefe.de/?ts=ada6dc2c</guid>
+</item>
+
+<item>
+<title>Im Pazifik brennt ein Chemiefrachter vor sich hin und keiner fühlt sich zuständig.Update: Oh, es gab da noch zwei Updates dazu, inzwischen liegt das Schiff anscheinend in einem Hafen in Korea.</title>
+<link>http://blog.fefe.de/?ts=ada92012</link>
+<guid>http://blog.fefe.de/?ts=ada92012</guid>
+</item>
+
+</channel>
+</rss>

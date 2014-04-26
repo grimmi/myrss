@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotrss", "dotrss\dotrss.csproj", "{C8BC783E-4A36-401A-8808-830C5A477D4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rssForm", "rssForm\rssForm.csproj", "{565F585A-BCCF-4B74-99BC-AFE2A1A03AA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotrssTests", "dotrssTests\dotrssTests.csproj", "{6AE3FA5B-13C3-4098-8CAD-8795A34A07D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8BC783E-4A36-401A-8808-830C5A477D4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8BC783E-4A36-401A-8808-830C5A477D4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8BC783E-4A36-401A-8808-830C5A477D4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8BC783E-4A36-401A-8808-830C5A477D4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{565F585A-BCCF-4B74-99BC-AFE2A1A03AA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{565F585A-BCCF-4B74-99BC-AFE2A1A03AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{565F585A-BCCF-4B74-99BC-AFE2A1A03AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{565F585A-BCCF-4B74-99BC-AFE2A1A03AA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AE3FA5B-13C3-4098-8CAD-8795A34A07D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AE3FA5B-13C3-4098-8CAD-8795A34A07D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AE3FA5B-13C3-4098-8CAD-8795A34A07D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AE3FA5B-13C3-4098-8CAD-8795A34A07D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
