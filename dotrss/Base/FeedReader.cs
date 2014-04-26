@@ -16,12 +16,19 @@ namespace dotrss.Base
 
         public FeedReader()
         {
+            // placeholder for handling ssl
             ServicePointManager.ServerCertificateValidationCallback += delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
             {
                 return true;
             };
         }
 
+        /// <summary>
+        /// Simple Method without error handling. It just downloads the feed as string and parses it to XDocument
+        /// </summary>
+        /// <param name="feedUri">Uri of the feed</param>
+        /// <param name="feedName">Name of the feed</param>
+        /// <returns></returns>
         public IFeedCreateResult CreateFeed(string feedUri, string feedName)
         {
             WebClient client = new WebClient();

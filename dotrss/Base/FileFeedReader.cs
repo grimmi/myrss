@@ -11,6 +11,9 @@ using System.Xml.Linq;
 
 namespace dotrss.Base
 {
+    /// <summary>
+    /// Handles feed-creation from (local) files
+    /// </summary>
     public class FileFeedReader : IFeedReader
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace dotrss.Interfaces
 {
+    /// <summary>
+    /// Responsible for creating and initializing feeds
+    /// </summary>
     public interface IFeedReader
     {
         IFeedCreateResult CreateFeed(string feedUri, string feedName);

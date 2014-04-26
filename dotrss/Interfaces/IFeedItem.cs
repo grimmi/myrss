@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace dotrss.Interfaces
 {
+    /// <summary>
+    /// Single entry in a feed
+    /// </summary>
     public interface IFeedItem
     {
         string ItemTitle { get; set; }

@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace dotrss.Util
 {
+    /// <summary>
+    /// Global Parameters
+    /// </summary>
     public static class Param
     {
+        // ******************************
+        // * Parameters for parsing XML *
+        // ******************************
         public static string XMLItemTag = "item";
         public static string XMLPubDateTag = "pubDate";
         public static string XMLTitleTag = "title";
@@ -15,6 +21,9 @@ namespace dotrss.Util
         public static string XMLContentTag = "content";
 
 
+        // **************************
+        // * Placeholder Parameters *
+        // **************************
         public static string PlaceHolderString = "n/a";
     }
 }

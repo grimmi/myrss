@@ -7,6 +7,9 @@ using System.Xml.Linq;
 
 namespace dotrss.Interfaces
 {
+    /// <summary>
+    /// IFeeds are holding the feed items
+    /// </summary>
     public interface IFeed
     {
         string Name { get; }

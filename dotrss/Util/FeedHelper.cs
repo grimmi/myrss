@@ -12,22 +12,18 @@ using System.Xml.Linq;
 
 namespace dotrss.Util
 {
+    /// <summary>
+    /// Helps with parsing and other stuff
+    /// </summary>
     class FeedHelper
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
-        //public static IList<IFeedItem> ParseStringToItemList(string itemString)
-        //{
-        //    IList<IFeedItem> items = new List<IFeedItem>();
-        //    XDocument itemXML = XDocument.Parse(itemString.Trim());
-        //    var itemElements = itemXML.Descendants("item");
-        //    foreach (var item in itemElements)
-        //    {
-        //        IFeedItem feedItem = ParseItemXMLToFeedItem(item);
-        //        items.Add(feedItem);
-        //    }
-        //    return items;
-        //}
 
+        /// <summary>
+        /// Reads all items from a given XML file
+        /// </summary>
+        /// <param name="feedXML">The XML file from the feed</param>
+        /// <returns>IEnumerable with all IFeedItems - some properties might be empty</returns>
         public static IEnumerable<IFeedItem> ParseItemsFromXML(XDocument feedXML)
         {
             IList<IFeedItem> items = new List<IFeedItem>();
@@ -47,14 +43,5 @@ namespace dotrss.Util
             }
             return items;
         }
-
-        //private static IFeedItem ParseItemXMLToFeedItem(XElement itemElement)
-        //{
-        //    XElement titleElement = itemElement.Descendants("title").First();
-        //    XElement descElement = itemElement.Descendants("description").First();
-        //    XElement dateElement = itemElement.Descendants("pubDate").First();
-        //    IFeedItem feedItem = new FeedItem(titleElement.Value, descElement.Value, "Hier kommt später der Content hin!", DateTime.Parse(dateElement.Value));
-        //    return feedItem;
-        //}
     }
 }

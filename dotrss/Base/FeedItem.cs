@@ -22,6 +22,10 @@ namespace dotrss.Base
             ItemDate = date;
         }
 
+        /// <summary>
+        /// Simple display
+        /// </summary>
+        /// <returns>[Title]: [Description] ([Date]) \r\n [Body]</returns>
         public override string ToString()
         {
             return String.Format("{0}: {1} ({2}) {3} {4}", ItemTitle, ItemDescription, ItemDate.HasValue ? ItemDate.Value.ToShortDateString() : "n/a", Environment.NewLine, ItemBody);
