@@ -11,20 +11,20 @@ namespace dotrss.Database
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Feed
     {
         public Feed()
         {
             this.FeedItem = new HashSet<FeedItem>();
         }
-    
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Uri { get; set; }
         public System.DateTime LastUpdated { get; set; }
         public string FeedType { get; set; }
-    
+
         public virtual ICollection<FeedItem> FeedItem { get; set; }
     }
 }

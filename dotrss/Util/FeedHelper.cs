@@ -41,7 +41,9 @@ namespace dotrss.Util
                 var content = (contentElement != null) ? contentElement.Value : Param.PlaceHolderString;
                 var dateElement = item.Descendants(Param.XMLPubDateTag).FirstOrDefault();
                 var date = (dateElement != null) ? DateTime.Parse(dateElement.Value) : default(DateTime);
-                FeedItem feedItem = new FeedItem(fromFeed, title, description, content, date);
+                var guidElement = item.Descendants(Param.XMLGuidTag).FirstOrDefault();
+                var guid = (guidElement != null) ? guidElement.Value : Guid.NewGuid().ToString();
+                FeedItem feedItem = new FeedItem(fromFeed, title, description, content, date, guid);
                 items.Add(feedItem);
             }
             return items;

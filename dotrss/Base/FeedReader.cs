@@ -33,8 +33,7 @@ namespace dotrss.Base
         /// <returns></returns>
         public IFeedCreateResult CreateFeed(string feedUri, string feedName)
         {
-            Feed newFeed = new Feed();
-            newFeed.Init(feedUri, feedName, Param.FeedTypeWeb);
+            Feed newFeed = Feed.Init(feedUri, feedName, Param.FeedTypeWeb);
             return new FeedCreateResult(newFeed, FeedCreateResultEnum.Success);
         }
     }

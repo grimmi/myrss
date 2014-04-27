@@ -9,6 +9,11 @@ namespace dotrss.Database
 {
     public partial class FeedItem
     {
+        public FeedItem()
+        {
+
+        }
+
         public FeedItem(Feed fromFeed, string title = "n/a", string description = "n/a", string body = "n/a", DateTime date = default(DateTime), string itemId = "")
         {
             Title = title;

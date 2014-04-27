@@ -24,11 +24,11 @@ namespace dotrss.Base
         {
             try
             {
-                Feed newFeed = new Feed();
+                Feed newFeed = null;
                 Uri fileUri = new Uri(fileName);
                 if (File.Exists(fileName))
                 {
-                    newFeed.Init(fileName, feedName, Param.FeedTypeFile);
+                    newFeed = Feed.Init(fileName, feedName, Param.FeedTypeFile);
                     return new FeedCreateResult(newFeed, FeedCreateResultEnum.Success);
                 }
                 else

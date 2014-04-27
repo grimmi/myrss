@@ -30,6 +30,7 @@ namespace dotrss.Testing
             string f = Path.GetFullPath(tagesschauPfad);
             Feed newFeed = feedReader.CreateFeed(f, "Tagesschau Test-Feed").Feed;
             var items = newFeed.Items;
+            //var fItems = newFeed.FeedItem.ToList<FeedItem>();
             Assert.AreEqual(40, items.Count());
             Assert.AreEqual("Niederlande feiern Willem-Alexander am \"Königstag\"", items.ElementAt(3).Title);
         }

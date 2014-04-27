@@ -19,6 +19,7 @@ namespace dotrss.Util
         public static string XMLTitleTag = "title";
         public static string XMLDescriptionTag = "description";
         public static string XMLContentTag = "content";
+        public static string XMLGuidTag = "guid";
 
         // **************
         // * Feed-Types *

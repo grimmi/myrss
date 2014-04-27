@@ -40,7 +40,7 @@ GO
 CREATE TABLE [dbo].[Feeds] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [Uri] nvarchar(max)  NOT NULL,
+    [Uri] nvarchar(max) NOT NULL,
     [LastUpdated] datetime  NOT NULL,
     [FeedType] nvarchar(max)  NOT NULL
 );

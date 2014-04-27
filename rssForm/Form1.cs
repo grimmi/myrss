@@ -67,8 +67,8 @@ namespace rssForm
         private void cmbBoxFeedItems_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox feedBox = sender as ComboBox;
-            IFeedItem selectedItem = feedBox.SelectedItem as IFeedItem;
-            txtBoxItemText.Text = selectedItem.ItemDescription;
+            FeedItem selectedItem = feedBox.SelectedItem as FeedItem;
+            txtBoxItemText.Text = selectedItem.Description;
         }
 
         private void rssForm_KeyDown(object sender, KeyEventArgs e)
