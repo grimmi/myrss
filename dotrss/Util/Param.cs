@@ -20,10 +20,21 @@ namespace dotrss.Util
         public static string XMLDescriptionTag = "description";
         public static string XMLContentTag = "content";
 
+        // **************
+        // * Feed-Types *
+        // **************
+        public const string FeedTypeFile = "file";
+        public const string FeedTypeWeb = "web";
 
         // **************************
         // * Placeholder Parameters *
         // **************************
         public static string PlaceHolderString = "n/a";
+    }
+
+    public enum FeedType
+    {
+        File,
+        Web
     }
 }

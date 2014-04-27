@@ -1,4 +1,5 @@
 ﻿using dotrss;
+using dotrss.Database;
 using dotrss.Base;
 using dotrss.Interfaces;
 using System;
@@ -33,10 +34,11 @@ namespace rssForm
             //IFeedCreateResult feedResult = feedReader.CreateFeed(@"D:\fefe_feed.xml", "fefe");
             IFeedReader feedReader = new FeedReader();
             IFeedCreateResult feedResult = feedReader.CreateFeed(txtBoxRSSUrl.Text, "CulinariCast");
-            IFeed rssFeed = feedResult.Feed;
+            Feed rssFeed = feedResult.Feed;
+            Feed feed = (Feed)rssFeed;
             if (rssFeed != null)
             {
-                foreach (IFeedItem feedItem in rssFeed.Items.OrderBy(f => f.ItemDate))
+                foreach (FeedItem feedItem in rssFeed.Items.OrderBy(f => f.PubDate))
                 {
                     cmbBoxFeedItems.Items.Add(feedItem);
                     cmbBoxFeedItems.DisplayMember = "ItemTitle";

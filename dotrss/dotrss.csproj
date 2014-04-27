@@ -30,11 +30,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.2.1.0\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +56,37 @@
     <Compile Include="Base\FeedItem.cs" />
     <Compile Include="Base\FeedReader.cs" />
     <Compile Include="Base\FileFeedReader.cs" />
+    <Compile Include="Database\Feed.cs">
+      <DependentUpon>FeedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\FeedContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeedContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\FeedContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeedContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\FeedItem.cs">
+      <DependentUpon>FeedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\FeedModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeedModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\FeedModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\FeedModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeedModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\IFeedCreateResult.cs" />
     <Compile Include="Util\FeedHelper.cs" />
     <Compile Include="Interfaces\IFeed.cs" />
@@ -56,16 +96,48 @@
     <Compile Include="Util\Param.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database\FeedModel.edmx.sql" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Database\FeedModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FeedModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Database\FeedContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FeedContext.Context.cs</LastGenOutput>
+      <DependentUpon>FeedModel.edmx</DependentUpon>
+    </None>
+    <None Include="Database\FeedContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FeedContext.cs</LastGenOutput>
+      <DependentUpon>FeedModel.edmx</DependentUpon>
+    </None>
+    <None Include="Database\FeedModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FeedModel.Context.cs</LastGenOutput>
+      <DependentUpon>FeedModel.edmx</DependentUpon>
+    </None>
+    <None Include="Database\FeedModel.edmx.diagram">
+      <DependentUpon>FeedModel.edmx</DependentUpon>
+    </None>
+    <None Include="Database\FeedModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FeedModel.cs</LastGenOutput>
+      <DependentUpon>FeedModel.edmx</DependentUpon>
+    </None>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

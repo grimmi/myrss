@@ -1,4 +1,5 @@
 ﻿using dotrss.Interfaces;
+using dotrss.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using dotrss.Util;
 
 namespace dotrss.Base
 {
@@ -31,12 +33,8 @@ namespace dotrss.Base
         /// <returns></returns>
         public IFeedCreateResult CreateFeed(string feedUri, string feedName)
         {
-            WebClient client = new WebClient();
-            client.UseDefaultCredentials = true;
-            var feedString = client.DownloadString(new Uri(feedUri));
-            XDocument feedXML = XDocument.Parse(feedString.Trim());
-            IFeed newFeed = new Feed();
-            newFeed.Init(new Uri(feedUri), feedName, feedXML);
+            Feed newFeed = new Feed();
+            newFeed.Init(feedUri, feedName, Param.FeedTypeWeb);
             return new FeedCreateResult(newFeed, FeedCreateResultEnum.Success);
         }
     }

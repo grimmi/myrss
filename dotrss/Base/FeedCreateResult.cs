@@ -1,4 +1,5 @@
 ﻿using dotrss.Interfaces;
+using dotrss.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace dotrss.Base
 {
     public class FeedCreateResult : IFeedCreateResult
     {
-        private readonly IFeed feed;
+        private readonly Feed feed;
         private readonly FeedCreateResultEnum result;
 
         public FeedCreateResult()
@@ -17,13 +18,13 @@ namespace dotrss.Base
 
         }
 
-        public FeedCreateResult(IFeed feed, FeedCreateResultEnum result)
+        public FeedCreateResult(Feed feed, FeedCreateResultEnum result)
         {
             this.feed = feed;
             this.result = result;
         }
 
-        public IFeed Feed
+        public Feed Feed
         {
             get { return feed; }
         }

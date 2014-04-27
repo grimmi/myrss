@@ -12,6 +12,7 @@ namespace dotrss.Interfaces
     /// </summary>
     public interface IFeed
     {
+        string IFeedId { get; }
         string Name { get; }
         IEnumerable<IFeedItem> Items { get; }
         Uri FeedUri { get; }

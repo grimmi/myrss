@@ -1,4 +1,6 @@
-﻿using dotrss.Interfaces;
+﻿using dotrss.Database;
+using dotrss.Interfaces;
+using dotrss.Util;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -23,19 +25,21 @@ namespace dotrss.Base
             try
             {
                 Feed newFeed = new Feed();
-                string fileString = File.ReadAllText(fileName).Trim();
-                newFeed.Init(new Uri(fileName), feedName, XDocument.Parse(fileString));
-                return new FeedCreateResult(newFeed as IFeed, FeedCreateResultEnum.Success);
+                Uri fileUri = new Uri(fileName);
+                if (File.Exists(fileName))
+                {
+                    newFeed.Init(fileName, feedName, Param.FeedTypeFile);
+                    return new FeedCreateResult(newFeed, FeedCreateResultEnum.Success);
+                }
+                else
+                {
+                    return new FeedCreateResult(null, FeedCreateResultEnum.ErrorFileNotFound);
+                }
             }
-            catch (FileNotFoundException notFoundEx)
+            catch (UriFormatException uriFormatEx)
             {
-                logger.ErrorException(">>>>>>>>", notFoundEx);
-                return new FeedCreateResult(null, FeedCreateResultEnum.ErrorFileNotFound);
-            }
-            catch (NotSupportedException notSuppEx)
-            {
-                logger.ErrorException(">>>>>>>>", notSuppEx);
-                return new FeedCreateResult(null, FeedCreateResultEnum.ErrorNotSupportedUriFormat);
+                logger.ErrorException(">>>>>>>>>", uriFormatEx);
+                return new FeedCreateResult(null, FeedCreateResultEnum.ErrorCouldNotParseUri);
             }
             catch (ArgumentException argEx)
             {

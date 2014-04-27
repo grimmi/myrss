@@ -1,4 +1,5 @@
 ﻿using dotrss.Base;
+using dotrss.Database;
 using dotrss.Interfaces;
 using NUnit.Framework;
 using System;
@@ -27,10 +28,10 @@ namespace dotrss.Testing
         {
             IFeedReader feedReader = new FileFeedReader();
             string f = Path.GetFullPath(tagesschauPfad);
-            IFeed newFeed = feedReader.CreateFeed(f, "Tagesschau Test-Feed").Feed;
+            Feed newFeed = feedReader.CreateFeed(f, "Tagesschau Test-Feed").Feed;
             var items = newFeed.Items;
             Assert.AreEqual(40, items.Count());
-            Assert.AreEqual("Niederlande feiern Willem-Alexander am \"Königstag\"", items.ElementAt(3).ItemTitle);
+            Assert.AreEqual("Niederlande feiern Willem-Alexander am \"Königstag\"", items.ElementAt(3).Title);
         }
 
         [Test]
@@ -38,10 +39,10 @@ namespace dotrss.Testing
         {
             IFeedReader feedReader = new FileFeedReader();
             string f = Path.GetFullPath(nsfwPfad);
-            IFeed newFeed = feedReader.CreateFeed(f, "NSFW Test-Feed").Feed;
+            Feed newFeed = feedReader.CreateFeed(f, "NSFW Test-Feed").Feed;
             var items = newFeed.Items;
             Assert.AreEqual(10, items.Count());
-            Assert.AreEqual("NSFW082 Erfahrungskohorte NSFW", items.ElementAt(2).ItemTitle);
+            Assert.AreEqual("NSFW082 Erfahrungskohorte NSFW", items.ElementAt(2).Title);
         }
 
         [Test]
@@ -49,12 +50,12 @@ namespace dotrss.Testing
         {
             IFeedReader feedReader = new FileFeedReader();
             string f = Path.GetFullPath(fefePfad);
-            IFeed newFeed = feedReader.CreateFeed(f, "Fefe Test-Feed").Feed;
+            Feed newFeed = feedReader.CreateFeed(f, "Fefe Test-Feed").Feed;
             var items = newFeed.Items;
             Assert.AreEqual(20, items.Count());
             Assert.AreEqual(
                 "Aus der beliebten Reihe \"bei UNS ist Kernkraft SICHER\": Rauchwolken über dem AKW Fessenheim.Ursache sei kein Feuer gewesen, sondern ein Problem mit einem Sicherungsschalter in einem Nebengebäude des Maschinenraums von Block ein.Ich bin mir sicher, dass keine Gefahr für Anwohner und Mitarbeiter besteht.",
-                items.ElementAt(5).ItemTitle);
+                items.ElementAt(5).Title);
         }
 
         [Test]
@@ -62,7 +63,7 @@ namespace dotrss.Testing
         {
             IFeedReader feedReader = new FileFeedReader();
             string f = Path.GetFullPath(tagesschauPfad);
-            IFeed newFeed = feedReader.CreateFeed(f, "NSFW Test-Feed").Feed;
+            Feed newFeed = feedReader.CreateFeed(f, "NSFW Test-Feed").Feed;
             Assert.AreEqual("NSFW Test-Feed", newFeed.Name);
         }
 
@@ -70,7 +71,7 @@ namespace dotrss.Testing
         public void FileNotFound()
         {
             IFeedReader feedReader = new FileFeedReader();
-            IFeed newFeed = feedReader.CreateFeed(nichtVorhandenPfad, "NotFound-Feed").Feed;
+            Feed newFeed = feedReader.CreateFeed(nichtVorhandenPfad, "NotFound-Feed").Feed;
             Assert.IsNull(newFeed);
         }
 
@@ -83,19 +84,11 @@ namespace dotrss.Testing
         }
 
         [Test]
-        public void CorrectResultInvalidPath()
+        public void CorrectResultEmptyUri()
         {
             IFeedReader feedReader = new FileFeedReader();
             IFeedCreateResult feedResult = feedReader.CreateFeed(ungueltigeUri, "Ungültiger Feed");
-            Assert.AreEqual(FeedCreateResultEnum.ErrorInvalidPath, feedResult.Result);
-        }
-
-        [Test]
-        public void CorrectResultNotSupported()
-        {
-            IFeedReader feedReader = new FileFeedReader();
-            IFeedCreateResult feedResult = feedReader.CreateFeed(nichtUnterstuetzt, "Ungültiger Feed");
-            Assert.AreEqual(FeedCreateResultEnum.ErrorNotSupportedUriFormat, feedResult.Result);
+            Assert.AreEqual(FeedCreateResultEnum.ErrorCouldNotParseUri, feedResult.Result);
         }
     }
 }

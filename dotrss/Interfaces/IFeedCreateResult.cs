@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dotrss.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace dotrss.Interfaces
     /// </summary>
     public interface IFeedCreateResult
     {
-        IFeed Feed { get; }
+        Feed Feed { get; }
         FeedCreateResultEnum Result { get; }
     }
 

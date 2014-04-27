@@ -1,11 +1,14 @@
 ﻿
 using dotrss.Base;
+using dotrss.Database;
 using dotrss.Interfaces;
 using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -24,9 +27,9 @@ namespace dotrss.Util
         /// </summary>
         /// <param name="feedXML">The XML file from the feed</param>
         /// <returns>IEnumerable with all IFeedItems - some properties might be empty</returns>
-        public static IEnumerable<IFeedItem> ParseItemsFromXML(XDocument feedXML)
+        public static IEnumerable<FeedItem> ParseItemsFromXML(XDocument feedXML, Feed fromFeed)
         {
-            IList<IFeedItem> items = new List<IFeedItem>();
+            IList<FeedItem> items = new List<FeedItem>();
             var itemElements = feedXML.Descendants(Param.XMLItemTag);
             foreach (var item in itemElements)
             {
@@ -38,10 +41,26 @@ namespace dotrss.Util
                 var content = (contentElement != null) ? contentElement.Value : Param.PlaceHolderString;
                 var dateElement = item.Descendants(Param.XMLPubDateTag).FirstOrDefault();
                 var date = (dateElement != null) ? DateTime.Parse(dateElement.Value) : default(DateTime);
-                IFeedItem feedItem = new FeedItem(title, description, content, date);
+                FeedItem feedItem = new FeedItem(fromFeed, title, description, content, date);
                 items.Add(feedItem);
             }
             return items;
+        }
+
+        public static IEnumerable<FeedItem> ReadItemsFromFile(string feedFile, Feed fromFeed)
+        {
+            var fileString = File.ReadAllText(feedFile).Trim();
+            XDocument feedXML = XDocument.Parse(fileString);
+            return ParseItemsFromXML(feedXML, fromFeed);
+        }
+
+        public static IEnumerable<FeedItem> ReadItemsFromWeb(string feedUri, Feed fromFeed)
+        {
+            WebClient client = new WebClient();
+            client.UseDefaultCredentials = true;
+            var feedString = client.DownloadString(new Uri(feedUri));
+            XDocument feedXML = XDocument.Parse(feedString.Trim());
+            return ParseItemsFromXML(feedXML, fromFeed);
         }
     }
 }

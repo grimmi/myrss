@@ -11,10 +11,12 @@ namespace dotrss.Interfaces
     /// </summary>
     public interface IFeedItem
     {
-        string ItemTitle { get; set; }
-        string ItemDescription { get; set; }
-        string ItemBody { get; set; }
-        DateTime? ItemDate { get; set; }
+        string IFeedItemId { get; }
+        string IFeedId { get; }
+        string ItemTitle { get; }
+        string ItemDescription { get; }
+        string ItemBody { get; }
+        DateTime? ItemDate { get; }
         string ToString();
     }
 }
