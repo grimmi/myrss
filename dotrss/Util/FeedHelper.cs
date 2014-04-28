@@ -37,13 +37,15 @@ namespace dotrss.Util
                 var title = (titleElement != null) ? titleElement.Value : Param.PlaceHolderString;
                 var descriptionElement = item.Descendants(Param.XMLDescriptionTag).FirstOrDefault();
                 var description = (descriptionElement != null) ? descriptionElement.Value : Param.PlaceHolderString;
-                var contentElement = item.Descendants(Param.XMLContentTag).FirstOrDefault();
+                var contentElement = item.Descendants().Where(e => e.Name.ToString().Contains(Param.XMLContentTag)).FirstOrDefault(); //(Param.XMLContentTag).FirstOrDefault();
                 var content = (contentElement != null) ? contentElement.Value : Param.PlaceHolderString;
                 var dateElement = item.Descendants(Param.XMLPubDateTag).FirstOrDefault();
                 var date = (dateElement != null) ? DateTime.Parse(dateElement.Value) : default(DateTime);
                 var guidElement = item.Descendants(Param.XMLGuidTag).FirstOrDefault();
                 var guid = (guidElement != null) ? guidElement.Value : Guid.NewGuid().ToString();
-                FeedItem feedItem = new FeedItem(fromFeed, title, description, content, date, guid);
+                var linkElement = item.Descendants(Param.XMLLinkTag).FirstOrDefault();
+                var link = (linkElement != null) ? linkElement.Value : Param.PlaceHolderString;
+                FeedItem feedItem = new FeedItem(fromFeed, title, description, content, date, guid, link);
                 items.Add(feedItem);
             }
             return items;
@@ -60,6 +62,7 @@ namespace dotrss.Util
         {
             WebClient client = new WebClient();
             client.UseDefaultCredentials = true;
+            client.Encoding = Encoding.UTF8;
             var feedString = client.DownloadString(new Uri(feedUri));
             XDocument feedXML = XDocument.Parse(feedString.Trim());
             return ParseItemsFromXML(feedXML, fromFeed);

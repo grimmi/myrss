@@ -8,14 +8,31 @@ using dotrss.Interfaces;
 using dotrss.Util;
 using dotrss.Database;
 using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace dotrss.Database
 {
     public partial class Feed
     {
-        Logger logger = LogManager.GetCurrentClassLogger();
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         private ICollection<FeedItem> itemCache;
         private DateTime lastRefresh = DateTime.MinValue;
+
+        /// <summary>
+        /// Setzt das letzte Update des Feeds auf den aktuellen Zeitpunkt (sollte in Event geändert werden)
+        /// </summary>
+        public void UpdateFeed()
+        {
+            using (var db = new FeedModelContainer())
+            {
+                var feed = db.Feeds.Where(f => f.Id == this.Id).FirstOrDefault();
+                if (feed != null)
+                {
+                    feed.LastUpdated = DateTime.Now;
+                    db.SaveChanges();
+                }
+            }
+        }
 
         public ICollection<FeedItem> Items
         {
@@ -27,13 +44,10 @@ namespace dotrss.Database
                     using (var db = new FeedModelContainer())
                     {
                         var items = db.FeedItems.Where(f => f.Feed.Id == this.Id);
-                        return items.ToList<FeedItem>();
+                        itemCache = items.ToList<FeedItem>();
                     }
                 }
-                else
-                {
-                    return itemCache;
-                }
+                return itemCache;
             }
         }
 
@@ -42,16 +56,17 @@ namespace dotrss.Database
             Feed initFeed = null;
             using (var db = new FeedModelContainer())
             {
+                logger.Debug("Anzahl Feeds Beginn Init: " + db.Feeds.Count());
                 var feedUris = db.Feeds.Select(f => f.Uri).ToList<string>();
                 if (!feedUris.Contains(feedUri))
                 {
                     initFeed = new Feed() { Uri = feedUri, FeedType = type, Name = name, LastUpdated = DateTime.MinValue };
-                    //db.Feeds.Add(initFeed);
-                    //db.SaveChanges();
+                    logger.Debug("Anzahl Feeds nach new Feed(): " + db.Feeds.Count());
                 }
                 else
                 {
                     initFeed = db.Feeds.Where(f => f.Uri.Equals(feedUri)).FirstOrDefault();
+                    logger.Debug("Anzahl Feeds nach Query: " + db.Feeds.Count());
                 }
             }
             initFeed.ReadItems();
@@ -71,6 +86,7 @@ namespace dotrss.Database
             if (items.Count() > 0)
             {
                 SaveItemsToDatabase(items);
+                UpdateFeed();
             }
         }
 

@@ -14,15 +14,15 @@ namespace dotrss.Database
 
         }
 
-        public FeedItem(Feed fromFeed, string title = "n/a", string description = "n/a", string body = "n/a", DateTime date = default(DateTime), string itemId = "")
+        public FeedItem(Feed fromFeed, string title = "n/a", string description = "n/a", string body = "n/a", DateTime date = default(DateTime), string itemId = "", string link = "")
         {
             Title = title;
             Description = description;
             Body = body;
             PubDate = date;
             UId = String.IsNullOrWhiteSpace(itemId) ? Guid.NewGuid().ToString() : itemId;
-            Uri = "";
             Feed = fromFeed;
+            Link = link;
         }
 
         /// <summary>

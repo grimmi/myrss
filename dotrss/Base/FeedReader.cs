@@ -10,11 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using dotrss.Util;
+using System.Diagnostics;
+using NLog;
 
 namespace dotrss.Base
 {
     public class FeedReader : IFeedReader
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         public FeedReader()
         {
@@ -33,6 +36,10 @@ namespace dotrss.Base
         /// <returns></returns>
         public IFeedCreateResult CreateFeed(string feedUri, string feedName)
         {
+            using (var db = new FeedModelContainer())
+            {
+                logger.Debug("Feeds vor Init: {0}", db.Feeds.Count());
+            }
             Feed newFeed = Feed.Init(feedUri, feedName, Param.FeedTypeWeb);
             return new FeedCreateResult(newFeed, FeedCreateResultEnum.Success);
         }

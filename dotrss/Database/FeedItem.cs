@@ -18,9 +18,9 @@ namespace dotrss.Database
         public string Title { get; set; }
         public string Description { get; set; }
         public string Body { get; set; }
-        public string Uri { get; set; }
         public string UId { get; set; }
         public System.DateTime PubDate { get; set; }
+        public string Link { get; set; }
     
         public virtual Feed Feed { get; set; }
     }

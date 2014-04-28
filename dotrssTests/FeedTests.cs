@@ -64,8 +64,8 @@ namespace dotrss.Testing
         {
             IFeedReader feedReader = new FileFeedReader();
             string f = Path.GetFullPath(tagesschauPfad);
-            Feed newFeed = feedReader.CreateFeed(f, "NSFW Test-Feed").Feed;
-            Assert.AreEqual("NSFW Test-Feed", newFeed.Name);
+            Feed newFeed = feedReader.CreateFeed(f, "Tagesschau Test-Feed").Feed;
+            Assert.AreEqual("Tagesschau Test-Feed", newFeed.Name);
         }
 
         [Test]

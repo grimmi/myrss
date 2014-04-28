@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/27/2014 11:38:16
+-- Date Created: 04/28/2014 08:33:34
 -- Generated from EDMX file: f:\dokumente\visual studio 2013\Projects\dotrss\dotrss\Database\FeedModel.edmx
 -- --------------------------------------------------
 
@@ -25,11 +25,11 @@ GO
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Feeds]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Feeds];
-GO
 IF OBJECT_ID(N'[dbo].[FeedItems]', 'U') IS NOT NULL
     DROP TABLE [dbo].[FeedItems];
+GO
+IF OBJECT_ID(N'[dbo].[Feeds]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Feeds];
 GO
 
 -- --------------------------------------------------
@@ -40,7 +40,7 @@ GO
 CREATE TABLE [dbo].[Feeds] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [Uri] nvarchar(max) NOT NULL,
+    [Uri] nvarchar(max)  NOT NULL,
     [LastUpdated] datetime  NOT NULL,
     [FeedType] nvarchar(max)  NOT NULL
 );
@@ -52,9 +52,9 @@ CREATE TABLE [dbo].[FeedItems] (
     [Title] nvarchar(max)  NOT NULL,
     [Description] nvarchar(max)  NOT NULL,
     [Body] nvarchar(max)  NOT NULL,
-    [Uri] nvarchar(max)  NOT NULL,
     [UId] nvarchar(max)  NOT NULL,
     [PubDate] datetime  NOT NULL,
+    [Link] nvarchar(max)  NOT NULL,
     [Feed_Id] int  NOT NULL
 );
 GO

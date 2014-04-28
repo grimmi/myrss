@@ -32,7 +32,9 @@
             this.txtBoxRSSUrl = new System.Windows.Forms.TextBox();
             this.btnBeenden = new System.Windows.Forms.Button();
             this.cmbBoxFeedItems = new System.Windows.Forms.ComboBox();
-            this.txtBoxItemText = new System.Windows.Forms.RichTextBox();
+            this.listViewFeeds = new System.Windows.Forms.ListView();
+            this.txtBoxFeedDetail = new System.Windows.Forms.TextBox();
+            this.feedBrowser = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
             // btnReadRSS
@@ -72,22 +74,41 @@
             this.cmbBoxFeedItems.TabIndex = 3;
             this.cmbBoxFeedItems.SelectedIndexChanged += new System.EventHandler(this.cmbBoxFeedItems_SelectedIndexChanged);
             // 
-            // txtBoxItemText
+            // listViewFeeds
             // 
-            this.txtBoxItemText.Enabled = false;
-            this.txtBoxItemText.Location = new System.Drawing.Point(13, 97);
-            this.txtBoxItemText.Name = "txtBoxItemText";
-            this.txtBoxItemText.Size = new System.Drawing.Size(529, 346);
-            this.txtBoxItemText.TabIndex = 4;
-            this.txtBoxItemText.Text = "";
-            this.txtBoxItemText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBoxItemText_KeyDown);
+            this.listViewFeeds.FullRowSelect = true;
+            this.listViewFeeds.Location = new System.Drawing.Point(560, 13);
+            this.listViewFeeds.MultiSelect = false;
+            this.listViewFeeds.Name = "listViewFeeds";
+            this.listViewFeeds.Size = new System.Drawing.Size(136, 430);
+            this.listViewFeeds.TabIndex = 5;
+            this.listViewFeeds.UseCompatibleStateImageBehavior = false;
+            this.listViewFeeds.SelectedIndexChanged += new System.EventHandler(this.listViewFeeds_SelectedIndexChanged);
+            // 
+            // txtBoxFeedDetail
+            // 
+            this.txtBoxFeedDetail.Location = new System.Drawing.Point(703, 13);
+            this.txtBoxFeedDetail.Multiline = true;
+            this.txtBoxFeedDetail.Name = "txtBoxFeedDetail";
+            this.txtBoxFeedDetail.Size = new System.Drawing.Size(190, 231);
+            this.txtBoxFeedDetail.TabIndex = 6;
+            // 
+            // feedBrowser
+            // 
+            this.feedBrowser.Location = new System.Drawing.Point(13, 97);
+            this.feedBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.feedBrowser.Name = "feedBrowser";
+            this.feedBrowser.Size = new System.Drawing.Size(529, 346);
+            this.feedBrowser.TabIndex = 7;
             // 
             // rssForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 455);
-            this.Controls.Add(this.txtBoxItemText);
+            this.ClientSize = new System.Drawing.Size(905, 455);
+            this.Controls.Add(this.feedBrowser);
+            this.Controls.Add(this.txtBoxFeedDetail);
+            this.Controls.Add(this.listViewFeeds);
             this.Controls.Add(this.cmbBoxFeedItems);
             this.Controls.Add(this.btnBeenden);
             this.Controls.Add(this.txtBoxRSSUrl);
@@ -106,7 +127,9 @@
         private System.Windows.Forms.TextBox txtBoxRSSUrl;
         private System.Windows.Forms.Button btnBeenden;
         private System.Windows.Forms.ComboBox cmbBoxFeedItems;
-        private System.Windows.Forms.RichTextBox txtBoxItemText;
+        private System.Windows.Forms.ListView listViewFeeds;
+        private System.Windows.Forms.TextBox txtBoxFeedDetail;
+        private System.Windows.Forms.WebBrowser feedBrowser;
     }
 }
 

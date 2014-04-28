@@ -21,6 +21,18 @@ namespace rssForm
         public rssForm()
         {
             InitializeComponent();
+            List<Feed> feeds = new List<Feed>();
+            using (var db = new dotrss.Database.FeedModelContainer())
+            {
+                feeds = db.Feeds.Include("FeedItem").ToList<Feed>();
+            }
+            foreach (var feed in feeds)
+            {
+                var listItem = new ListViewItem();
+                listItem.Tag = feed;
+                listItem.Text = feed.Name;
+                listViewFeeds.Items.Add(listItem);
+            }
         }
 
         private void btnBeenden_Click(object sender, EventArgs e)
@@ -68,7 +80,7 @@ namespace rssForm
         {
             ComboBox feedBox = sender as ComboBox;
             FeedItem selectedItem = feedBox.SelectedItem as FeedItem;
-            txtBoxItemText.Text = selectedItem.Description;
+            feedBrowser.DocumentText = selectedItem.Body;
         }
 
         private void rssForm_KeyDown(object sender, KeyEventArgs e)
@@ -95,6 +107,23 @@ namespace rssForm
         private void txtBoxItemText_KeyDown(object sender, KeyEventArgs e)
         {
             rssForm_KeyDown(sender, e);
+        }
+
+        private void listViewFeeds_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var listView = sender as ListView;
+            if (listView.SelectedItems.Count > 0)
+            {
+                var item = listView.SelectedItems[0];
+                if (item != null)
+                {
+                    Feed itemFeed = item.Tag as Feed;
+                    txtBoxFeedDetail.Text = "";
+                    txtBoxFeedDetail.Text += itemFeed.Name + Environment.NewLine;
+                    txtBoxFeedDetail.Text += "Letztes Update: " + itemFeed.LastUpdated.ToShortDateString() + Environment.NewLine;
+                    txtBoxFeedDetail.Text += "Anzahl Einträge: " + itemFeed.Items.Count;
+                }
+            }
         }
     }
 }

@@ -31,9 +31,9 @@
     <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Uri" Type="nvarchar(max)" Nullable="false" />
     <Property Name="UId" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PubDate" Type="datetime" Nullable="false" />
+    <Property Name="Link" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Feed_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FeedFeedItem">
@@ -65,11 +65,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Uri" Type="String" Nullable="false" />
-          <Property Name="LastUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Uri" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="FeedItem" Relationship="FeedModel.FeedFeedItem" FromRole="Feed" ToRole="FeedItem" />
-          <Property Name="FeedType" Type="String" Nullable="false" />
+          <Property Name="FeedType" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
         <EntityType Name="FeedItem">
           <Key>
@@ -77,12 +77,12 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Feed" Relationship="FeedModel.FeedFeedItem" FromRole="FeedItem" ToRole="Feed" />
-          <Property Name="Title" Type="String" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" />
-          <Property Name="Body" Type="String" Nullable="false" />
-          <Property Name="Uri" Type="String" Nullable="false" />
-          <Property Name="UId" Type="String" Nullable="false" />
-          <Property Name="PubDate" Type="DateTime" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="UId" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PubDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Link" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FeedFeedItem">
           <End Type="FeedModel.Feed" Role="Feed" Multiplicity="1" />
@@ -112,9 +112,9 @@
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Body" ColumnName="Body" />
-          <ScalarProperty Name="Uri" ColumnName="Uri" />
           <ScalarProperty Name="UId" ColumnName="UId" />
           <ScalarProperty Name="PubDate" ColumnName="PubDate" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
