@@ -24,11 +24,11 @@ namespace dotrss.Testing
         private static string nichtUnterstuetzt = "hxxp://blubb";
 
         [Test]
-        public void ParseTagesschauItem()
+        public async void ParseTagesschauItem()
         {
             IFeedReader feedReader = new FileFeedReader();
             string f = Path.GetFullPath(tagesschauPfad);
-            Feed newFeed = feedReader.CreateFeed(f, "Tagesschau Test-Feed").Feed;
+            Feed newFeed = (await feedReader.CreateFeed(f, "Tagesschau Test-Feed")).Feed;
             var items = newFeed.Items;
             //var fItems = newFeed.FeedItem.ToList<FeedItem>();
             Assert.AreEqual(40, items.Count());
@@ -36,22 +36,22 @@ namespace dotrss.Testing
         }
 
         [Test]
-        public void ParseNSFWItem()
+        public async void ParseNSFWItem()
         {
             IFeedReader feedReader = new FileFeedReader();
             string f = Path.GetFullPath(nsfwPfad);
-            Feed newFeed = feedReader.CreateFeed(f, "NSFW Test-Feed").Feed;
+            Feed newFeed = (await feedReader.CreateFeed(f, "NSFW Test-Feed")).Feed;
             var items = newFeed.Items;
             Assert.AreEqual(10, items.Count());
             Assert.AreEqual("NSFW082 Erfahrungskohorte NSFW", items.ElementAt(2).Title);
         }
 
         [Test]
-        public void ParseFefeItem()
+        public async void ParseFefeItem()
         {
             IFeedReader feedReader = new FileFeedReader();
             string f = Path.GetFullPath(fefePfad);
-            Feed newFeed = feedReader.CreateFeed(f, "Fefe Test-Feed").Feed;
+            Feed newFeed = (await feedReader.CreateFeed(f, "Fefe Test-Feed")).Feed;
             var items = newFeed.Items;
             Assert.AreEqual(20, items.Count());
             Assert.AreEqual(
@@ -60,35 +60,35 @@ namespace dotrss.Testing
         }
 
         [Test]
-        public void CorrectFeedName()
+        public async void CorrectFeedName()
         {
             IFeedReader feedReader = new FileFeedReader();
             string f = Path.GetFullPath(tagesschauPfad);
-            Feed newFeed = feedReader.CreateFeed(f, "Tagesschau Test-Feed").Feed;
+            Feed newFeed = (await feedReader.CreateFeed(f, "Tagesschau Test-Feed")).Feed;
             Assert.AreEqual("Tagesschau Test-Feed", newFeed.Name);
         }
 
         [Test]
-        public void FileNotFound()
+        public async void FileNotFound()
         {
             IFeedReader feedReader = new FileFeedReader();
-            Feed newFeed = feedReader.CreateFeed(nichtVorhandenPfad, "NotFound-Feed").Feed;
+            Feed newFeed = (await feedReader.CreateFeed(nichtVorhandenPfad, "NotFound-Feed")).Feed;
             Assert.IsNull(newFeed);
         }
 
         [Test]
-        public void CorrectResultFileNotFound()
+        public async void CorrectResultFileNotFound()
         {
             IFeedReader feedReader = new FileFeedReader();
-            IFeedCreateResult feedResult = feedReader.CreateFeed(nichtVorhandenPfad, "NotFound-Feed");
+            IFeedCreateResult feedResult = await feedReader.CreateFeed(nichtVorhandenPfad, "NotFound-Feed");
             Assert.AreEqual(FeedCreateResultEnum.ErrorFileNotFound, feedResult.Result);
         }
 
         [Test]
-        public void CorrectResultEmptyUri()
+        public async void CorrectResultEmptyUri()
         {
             IFeedReader feedReader = new FileFeedReader();
-            IFeedCreateResult feedResult = feedReader.CreateFeed(ungueltigeUri, "Ungültiger Feed");
+            IFeedCreateResult feedResult = await feedReader.CreateFeed(ungueltigeUri, "Ungültiger Feed");
             Assert.AreEqual(FeedCreateResultEnum.ErrorCouldNotParseUri, feedResult.Result);
         }
     }

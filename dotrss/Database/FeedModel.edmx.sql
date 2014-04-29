@@ -41,7 +41,7 @@ CREATE TABLE [dbo].[Feeds] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Uri] nvarchar(max)  NOT NULL,
-    [LastUpdated] datetime  NOT NULL,
+    [LastUpdated] datetime2  NOT NULL,
     [FeedType] nvarchar(max)  NOT NULL
 );
 GO
@@ -53,7 +53,7 @@ CREATE TABLE [dbo].[FeedItems] (
     [Description] nvarchar(max)  NOT NULL,
     [Body] nvarchar(max)  NOT NULL,
     [UId] nvarchar(max)  NOT NULL,
-    [PubDate] datetime  NOT NULL,
+    [PubDate] datetime2  NOT NULL,
     [Link] nvarchar(max)  NOT NULL,
     [Feed_Id] int  NOT NULL
 );

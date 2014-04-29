@@ -88,6 +88,7 @@
       <DependentUpon>FeedModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IFeedCreateResult.cs" />
+    <Compile Include="Util\DbgHelper.cs" />
     <Compile Include="Util\FeedHelper.cs" />
     <Compile Include="Interfaces\IFeed.cs" />
     <Compile Include="Interfaces\IFeedItem.cs" />

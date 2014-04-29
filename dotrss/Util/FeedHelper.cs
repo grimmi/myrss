@@ -27,8 +27,9 @@ namespace dotrss.Util
         /// </summary>
         /// <param name="feedXML">The XML file from the feed</param>
         /// <returns>IEnumerable with all IFeedItems - some properties might be empty</returns>
-        public static IEnumerable<FeedItem> ParseItemsFromXML(XDocument feedXML, Feed fromFeed)
+        public static async Task<IEnumerable<FeedItem>> ParseItemsFromXML(XDocument feedXML, Feed fromFeed)
         {
+            DbgHelper.CurrentNumberOfFeeds("Beginn von ParseItemsFromXML");
             IList<FeedItem> items = new List<FeedItem>();
             var itemElements = feedXML.Descendants(Param.XMLItemTag);
             foreach (var item in itemElements)
@@ -48,24 +49,27 @@ namespace dotrss.Util
                 FeedItem feedItem = new FeedItem(fromFeed, title, description, content, date, guid, link);
                 items.Add(feedItem);
             }
+            DbgHelper.CurrentNumberOfFeeds("Ende von ParseItemsFromXML");
             return items;
         }
 
-        public static IEnumerable<FeedItem> ReadItemsFromFile(string feedFile, Feed fromFeed)
+        public static async Task<IEnumerable<FeedItem>> ReadItemsFromFile(string feedFile, Feed fromFeed)
         {
+            DbgHelper.CurrentNumberOfFeeds("Beginn von ReadItemsFromFile");
             var fileString = File.ReadAllText(feedFile).Trim();
             XDocument feedXML = XDocument.Parse(fileString);
-            return ParseItemsFromXML(feedXML, fromFeed);
+            return await ParseItemsFromXML(feedXML, fromFeed);
         }
 
-        public static IEnumerable<FeedItem> ReadItemsFromWeb(string feedUri, Feed fromFeed)
+        public static async Task<IEnumerable<FeedItem>> ReadItemsFromWeb(string feedUri, Feed fromFeed)
         {
+            DbgHelper.CurrentNumberOfFeeds("Beginn von ReadItemsFromWeb");
             WebClient client = new WebClient();
             client.UseDefaultCredentials = true;
             client.Encoding = Encoding.UTF8;
             var feedString = client.DownloadString(new Uri(feedUri));
             XDocument feedXML = XDocument.Parse(feedString.Trim());
-            return ParseItemsFromXML(feedXML, fromFeed);
+            return await ParseItemsFromXML(feedXML, fromFeed);
         }
     }
 }

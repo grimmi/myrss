@@ -20,7 +20,7 @@ namespace dotrss.Base
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        public IFeedCreateResult CreateFeed(string fileName, string feedName)
+        public async Task<IFeedCreateResult> CreateFeed(string fileName, string feedName)
         {
             try
             {
@@ -28,7 +28,7 @@ namespace dotrss.Base
                 Uri fileUri = new Uri(fileName);
                 if (File.Exists(fileName))
                 {
-                    newFeed = Feed.Init(fileName, feedName, Param.FeedTypeFile);
+                    newFeed = await Feed.Init(fileName, feedName, Param.FeedTypeFile);
                     return new FeedCreateResult(newFeed, FeedCreateResultEnum.Success);
                 }
                 else

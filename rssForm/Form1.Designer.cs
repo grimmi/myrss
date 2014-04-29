@@ -35,6 +35,7 @@
             this.listViewFeeds = new System.Windows.Forms.ListView();
             this.txtBoxFeedDetail = new System.Windows.Forms.TextBox();
             this.feedBrowser = new System.Windows.Forms.WebBrowser();
+            this.txtBoxMultiFeedBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnReadRSS
@@ -98,14 +99,24 @@
             this.feedBrowser.Location = new System.Drawing.Point(13, 97);
             this.feedBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.feedBrowser.Name = "feedBrowser";
-            this.feedBrowser.Size = new System.Drawing.Size(529, 346);
+            this.feedBrowser.Size = new System.Drawing.Size(529, 27);
             this.feedBrowser.TabIndex = 7;
+            // 
+            // txtBoxMultiFeedBox
+            // 
+            this.txtBoxMultiFeedBox.Location = new System.Drawing.Point(13, 131);
+            this.txtBoxMultiFeedBox.Multiline = true;
+            this.txtBoxMultiFeedBox.Name = "txtBoxMultiFeedBox";
+            this.txtBoxMultiFeedBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBoxMultiFeedBox.Size = new System.Drawing.Size(529, 312);
+            this.txtBoxMultiFeedBox.TabIndex = 8;
             // 
             // rssForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(905, 455);
+            this.Controls.Add(this.txtBoxMultiFeedBox);
             this.Controls.Add(this.feedBrowser);
             this.Controls.Add(this.txtBoxFeedDetail);
             this.Controls.Add(this.listViewFeeds);
@@ -130,6 +141,7 @@
         private System.Windows.Forms.ListView listViewFeeds;
         private System.Windows.Forms.TextBox txtBoxFeedDetail;
         private System.Windows.Forms.WebBrowser feedBrowser;
+        private System.Windows.Forms.TextBox txtBoxMultiFeedBox;
     }
 }
 

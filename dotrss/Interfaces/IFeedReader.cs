@@ -11,6 +11,6 @@ namespace dotrss.Interfaces
     /// </summary>
     public interface IFeedReader
     {
-        IFeedCreateResult CreateFeed(string feedUri, string feedName);
+        Task<IFeedCreateResult> CreateFeed(string feedUri, string feedName);
     }
 }

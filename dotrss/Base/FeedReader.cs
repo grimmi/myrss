@@ -34,13 +34,9 @@ namespace dotrss.Base
         /// <param name="feedUri">Uri of the feed</param>
         /// <param name="feedName">Name of the feed</param>
         /// <returns></returns>
-        public IFeedCreateResult CreateFeed(string feedUri, string feedName)
+        public async Task<IFeedCreateResult> CreateFeed(string feedUri, string feedName)
         {
-            using (var db = new FeedModelContainer())
-            {
-                logger.Debug("Feeds vor Init: {0}", db.Feeds.Count());
-            }
-            Feed newFeed = Feed.Init(feedUri, feedName, Param.FeedTypeWeb);
+            Feed newFeed = await Feed.Init(feedUri, feedName, Param.FeedTypeWeb);
             return new FeedCreateResult(newFeed, FeedCreateResultEnum.Success);
         }
     }

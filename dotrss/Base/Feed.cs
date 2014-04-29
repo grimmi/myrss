@@ -9,6 +9,7 @@ using dotrss.Util;
 using dotrss.Database;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace dotrss.Database
 {
@@ -25,11 +26,14 @@ namespace dotrss.Database
         {
             using (var db = new FeedModelContainer())
             {
+                DbgHelper.CurrentNumberOfFeeds("Beginn von UpdateFeed");
                 var feed = db.Feeds.Where(f => f.Id == this.Id).FirstOrDefault();
                 if (feed != null)
                 {
+                    DbgHelper.CurrentNumberOfFeeds("Feed gefunden");
                     feed.LastUpdated = DateTime.Now;
                     db.SaveChanges();
+                    DbgHelper.CurrentNumberOfFeeds("Nach db.SaveChanges");
                 }
             }
         }
@@ -51,42 +55,47 @@ namespace dotrss.Database
             }
         }
 
-        public static Feed Init(string feedUri, string name, string type)
+        public static async Task<Feed> Init(string feedUri, string name, string type)
         {
             Feed initFeed = null;
+            DbgHelper.CurrentNumberOfFeeds("Beginn von Init");
             using (var db = new FeedModelContainer())
             {
-                logger.Debug("Anzahl Feeds Beginn Init: " + db.Feeds.Count());
                 var feedUris = db.Feeds.Select(f => f.Uri).ToList<string>();
                 if (!feedUris.Contains(feedUri))
                 {
+                    DbgHelper.CurrentNumberOfFeeds("neue feedUri");
                     initFeed = new Feed() { Uri = feedUri, FeedType = type, Name = name, LastUpdated = DateTime.MinValue };
-                    logger.Debug("Anzahl Feeds nach new Feed(): " + db.Feeds.Count());
                 }
                 else
                 {
+                    DbgHelper.CurrentNumberOfFeeds("Keine neue feedUri");
                     initFeed = db.Feeds.Where(f => f.Uri.Equals(feedUri)).FirstOrDefault();
-                    logger.Debug("Anzahl Feeds nach Query: " + db.Feeds.Count());
                 }
             }
-            initFeed.ReadItems();
+            DbgHelper.CurrentNumberOfFeeds("Vor ReadItems");
+            await initFeed.ReadItems();
             return initFeed;
         }
 
-        public void ReadItems()
+        public async Task ReadItems()
         {
+            DbgHelper.CurrentNumberOfFeeds("Beginn von ReadItems");
             IEnumerable<FeedItem> items = new List<FeedItem>();
             switch (FeedType)
             {
-                case Param.FeedTypeFile: items = FeedHelper.ReadItemsFromFile(Uri, this);
+                case Param.FeedTypeFile: items = await FeedHelper.ReadItemsFromFile(Uri, this);
                     break;
-                case Param.FeedTypeWeb: items = FeedHelper.ReadItemsFromWeb(Uri, this);
+                case Param.FeedTypeWeb: items = await FeedHelper.ReadItemsFromWeb(Uri, this);
                     break;
             }
             if (items.Count() > 0)
             {
+                DbgHelper.CurrentNumberOfFeeds("items.Count > 0");
                 SaveItemsToDatabase(items);
+                DbgHelper.CurrentNumberOfFeeds("Nach SaveItemsToDatabase");
                 UpdateFeed();
+                DbgHelper.CurrentNumberOfFeeds("Nach UpdateFeed");
             }
         }
 
@@ -94,6 +103,7 @@ namespace dotrss.Database
         {
             using (var db = new FeedModelContainer())
             {
+                DbgHelper.CurrentNumberOfFeeds("Beginn von SaveItemsToDatabase");
                 var itemUIds = db.FeedItems.Where(i => i.Feed.Id == this.Id).Select(i => i.UId).ToList<string>();
                 foreach (var item in items)
                 {
@@ -109,7 +119,9 @@ namespace dotrss.Database
                         logger.ErrorException(">>>>>>>>>>>", dbValEx);
                     }
                 }
+                DbgHelper.CurrentNumberOfFeeds("Vor db.SaveChanges");
                 db.SaveChanges();
+                DbgHelper.CurrentNumberOfFeeds("Nach db.SaveChanges");
             }
         }
     }

@@ -42,37 +42,100 @@ namespace rssForm
 
         private void btnReadRSS_Click(object sender, EventArgs e)
         {
-            //IFeedReader feedReader = new FileFeedReader();
-            //IFeedCreateResult feedResult = feedReader.CreateFeed(@"D:\fefe_feed.xml", "fefe");
-            IFeedReader feedReader = new FeedReader();
-            IFeedCreateResult feedResult = feedReader.CreateFeed(txtBoxRSSUrl.Text, "CulinariCast");
-            Feed rssFeed = feedResult.Feed;
-            Feed feed = (Feed)rssFeed;
-            if (rssFeed != null)
+            TaskFactory fact = new TaskFactory();
+            Task a = fact.StartNew(() => CreateFeedAndWriteFeedItemsToTextbox(@"D:\nsfw_feed.xml", "NSFW"));
+            Task b = fact.StartNew(() => CreateFeedAndWriteFeedItemsToTextbox(@"D:\tagesschau_feed.xml", "Tagesschau"));
+            Task c = fact.StartNew(() => CreateFeedAndWriteFeedItemsToTextbox(@"D:\fefe_feed.xml", "Fefe"));
+            //cmbBoxFeedItems.DisplayMember = "ItemTitle";
+            //BackgroundWorker bgWorker = new BackgroundWorker();
+            //bgWorker.DoWork += HandleRssButtonClick;
+            //string[] workerParams = new string[] { txtBoxRSSUrl.Text, "CulinariCast" };
+            //bgWorker.RunWorkerAsync(workerParams);
+        }
+
+        private void AddTextToMultiFeed(string newText)
+        {
+            SuspendLayout();
+            txtBoxMultiFeedBox.Text += newText + Environment.NewLine;
+            ResumeLayout();
+        }
+
+        private async Task CreateFeedAndWriteFeedItemsToTextbox(string fileName, string feedName)
+        {
+            Debug.WriteLine(fileName + " : " + feedName);
+            IFeedReader feedReader = new FileFeedReader();
+            IFeedCreateResult result = await feedReader.CreateFeed(fileName, feedName);
+            Feed resultFeed = result.Feed;
+            foreach (var item in resultFeed.Items)
             {
-                foreach (FeedItem feedItem in rssFeed.Items.OrderBy(f => f.PubDate))
+                var text = item.Title.Substring(0, Math.Min(item.Title.Length, 10));
+                MethodInvoker addText = () => AddTextToMultiFeed(resultFeed.Name + ": " + text);
+                txtBoxMultiFeedBox.Invoke(addText);
+            }
+        }
+
+        private async void HandleRssButtonClick(object sender, DoWorkEventArgs e)
+        {
+            string[] feedParams = e.Argument as string[];
+            HandleRSSRead(feedParams[0], feedParams[1]);
+        }
+
+        private void AddFeedItem(FeedItem feedItem)
+        {
+            cmbBoxFeedItems.Items.Add(feedItem);
+        }
+
+        private void SetIndex(int index)
+        {
+            cmbBoxFeedItems.SelectedIndex = index;
+        }
+
+        private async Task HandleRSSRead(string url, string name)
+        {
+            try
+            {
+                IFeedReader feedReader = new FeedReader();
+                IFeedCreateResult feedResult = await feedReader.CreateFeed(txtBoxRSSUrl.Text, "CulinariCast");
+                Feed rssFeed = feedResult.Feed;
+                Feed feed = (Feed)rssFeed;
+                if (rssFeed != null)
                 {
-                    cmbBoxFeedItems.Items.Add(feedItem);
-                    cmbBoxFeedItems.DisplayMember = "ItemTitle";
+                    foreach (FeedItem feedItem in rssFeed.Items.OrderBy(f => f.PubDate))
+                    {
+                        MethodInvoker addItem = () => AddFeedItem(feedItem);
+                        cmbBoxFeedItems.Invoke(addItem);
+                    }
+                    if (cmbBoxFeedItems.Items.Count > 0)
+                    {
+                        try
+                        {
+                            MethodInvoker setIndex = () => SetIndex(0);
+                            cmbBoxFeedItems.Invoke(setIndex);
+                        }
+                        catch (System.Reflection.TargetParameterCountException argCountEx)
+                        {
+                            Debug.WriteLine(argCountEx);
+                        }
+                    }
                 }
-                if (rssFeed.Items.Count() > 0)
+                else
                 {
-                    cmbBoxFeedItems.SelectedIndex = 0;
+                    switch (feedResult.Result)
+                    {
+                        case FeedCreateResultEnum.ErrorCouldNotParseUri: MessageBox.Show("Uri hatte ungültiges Format!");
+                            break;
+                        case FeedCreateResultEnum.ErrorFileNotFound: MessageBox.Show("Datei konnte nicht gefunden werden!");
+                            break;
+                        case FeedCreateResultEnum.ErrorNotSupportedUriFormat: MessageBox.Show("Dieses Uri-Format wird nicht unterstützt!");
+                            break;
+                        default: MessageBox.Show("Unbekannter Fehler beim Erstellen des Feeds!");
+                            break;
+                    }
                 }
             }
-            else
+            catch (InvalidOperationException invOpEx)
             {
-                switch (feedResult.Result)
-                {
-                    case FeedCreateResultEnum.ErrorCouldNotParseUri: MessageBox.Show("Uri hatte ungültiges Format!");
-                        break;
-                    case FeedCreateResultEnum.ErrorFileNotFound: MessageBox.Show("Datei konnte nicht gefunden werden!");
-                        break;
-                    case FeedCreateResultEnum.ErrorNotSupportedUriFormat: MessageBox.Show("Dieses Uri-Format wird nicht unterstützt!");
-                        break;
-                    default: MessageBox.Show("Unbekannter Fehler beim Erstellen des Feeds!");
-                        break;
-                }
+                Debug.WriteLine("InvOpException: " + invOpEx);
             }
         }
 
