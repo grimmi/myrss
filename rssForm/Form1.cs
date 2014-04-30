@@ -25,13 +25,20 @@ namespace rssForm
             using (var db = new dotrss.Database.FeedModelContainer())
             {
                 feeds = db.Feeds.Include("FeedItem").ToList<Feed>();
-            }
-            foreach (var feed in feeds)
-            {
-                var listItem = new ListViewItem();
-                listItem.Tag = feed;
-                listItem.Text = feed.Name;
-                listViewFeeds.Items.Add(listItem);
+                foreach (var feed in feeds.OrderBy(f => f.Name))
+                {
+                    TreeNode feedNode = new TreeNode();
+                    feedNode.Text = feed.Name + "(" + feed.Items.Count + ")";
+                    feedNode.Tag = feed;
+                    foreach (var feedItem in feed.Items)
+                    {
+                        TreeNode itemNode = new TreeNode();
+                        itemNode.Text = feedItem.Title.Substring(0, Math.Max(feedItem.Title.Length, 15));
+                        itemNode.Tag = feedItem;
+                        feedNode.Nodes.Add(itemNode);
+                    }
+                    treeViewFeedList.Nodes.Add(feedNode);
+                }
             }
         }
 
@@ -43,14 +50,10 @@ namespace rssForm
         private void btnReadRSS_Click(object sender, EventArgs e)
         {
             TaskFactory fact = new TaskFactory();
-            Task a = fact.StartNew(() => CreateFeedAndWriteFeedItemsToTextbox(@"D:\nsfw_feed.xml", "NSFW"));
-            Task b = fact.StartNew(() => CreateFeedAndWriteFeedItemsToTextbox(@"D:\tagesschau_feed.xml", "Tagesschau"));
-            Task c = fact.StartNew(() => CreateFeedAndWriteFeedItemsToTextbox(@"D:\fefe_feed.xml", "Fefe"));
-            //cmbBoxFeedItems.DisplayMember = "ItemTitle";
-            //BackgroundWorker bgWorker = new BackgroundWorker();
-            //bgWorker.DoWork += HandleRssButtonClick;
-            //string[] workerParams = new string[] { txtBoxRSSUrl.Text, "CulinariCast" };
-            //bgWorker.RunWorkerAsync(workerParams);
+            Task feedTask = fact.StartNew(() => CreateFeedAndWriteFeedItemsToTextbox(txtBoxRSSUrl.Text, "WRINT"));
+            //Task a = fact.StartNew(() => CreateFeedAndWriteFeedItemsToTextbox(@"D:\nsfw_feed.xml", "NSFW"));
+            //Task b = fact.StartNew(() => CreateFeedAndWriteFeedItemsToTextbox(@"D:\tagesschau_feed.xml", "Tagesschau"));
+            //Task c = fact.StartNew(() => CreateFeedAndWriteFeedItemsToTextbox(@"D:\fefe_feed.xml", "Fefe"));
         }
 
         private void AddTextToMultiFeed(string newText)
@@ -62,9 +65,24 @@ namespace rssForm
 
         private async Task CreateFeedAndWriteFeedItemsToTextbox(string fileName, string feedName)
         {
-            Debug.WriteLine(fileName + " : " + feedName);
-            IFeedReader feedReader = new FileFeedReader();
-            IFeedCreateResult result = await feedReader.CreateFeed(fileName, feedName);
+            IFeedReader synFeedReader = new SyndicationFeedReader();
+            IFeedCreateResult synResult = await synFeedReader.CreateFeed(fileName, feedName);
+            if (synResult.Result == FeedCreateResultEnum.Success)
+            {
+
+            }
+            IFeedReader feedReader;
+            IFeedCreateResult result;
+            if (!fileName.StartsWith("http"))
+            {
+                feedReader = new FileFeedReader();
+                result = await feedReader.CreateFeed(fileName, feedName);
+            }
+            else
+            {
+                feedReader = new FeedReader();
+                result = await feedReader.CreateFeed(fileName, feedName);
+            }
             Feed resultFeed = result.Feed;
             foreach (var item in resultFeed.Items)
             {
@@ -186,6 +204,42 @@ namespace rssForm
                     txtBoxFeedDetail.Text += "Letztes Update: " + itemFeed.LastUpdated.ToShortDateString() + Environment.NewLine;
                     txtBoxFeedDetail.Text += "Anzahl Einträge: " + itemFeed.Items.Count;
                 }
+            }
+        }
+
+        private void treeViewFeedList_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeView tView = sender as TreeView;
+            TreeNode clickedNode = e.Node;
+            if (clickedNode.Tag is Feed)
+            {
+                FeedNodeClicked(clickedNode);
+            }
+            else if (clickedNode.Tag is FeedItem)
+            {
+                FeedItemNodeClicked(clickedNode);
+            }
+        }
+
+        private void FeedNodeClicked(TreeNode feedNode)
+        {
+
+        }
+
+        private void FeedItemNodeClicked(TreeNode itemNode)
+        {
+            feedBrowser.DocumentText = (itemNode.Tag as FeedItem).Body;
+        }
+
+        private void treeViewFeedList_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Tag is Feed)
+            {
+                FeedNodeClicked(e.Node);
+            }
+            else if (e.Node.Tag is FeedItem)
+            {
+                FeedItemNodeClicked(e.Node);
             }
         }
     }

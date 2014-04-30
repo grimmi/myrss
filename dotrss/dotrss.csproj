@@ -44,6 +44,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +57,7 @@
     <Compile Include="Base\FeedItem.cs" />
     <Compile Include="Base\FeedReader.cs" />
     <Compile Include="Base\FileFeedReader.cs" />
+    <Compile Include="Base\SyndicationFeedReader.cs" />
     <Compile Include="Database\Feed.cs">
       <DependentUpon>FeedModel.tt</DependentUpon>
     </Compile>
