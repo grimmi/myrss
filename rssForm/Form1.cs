@@ -71,25 +71,25 @@ namespace rssForm
             {
 
             }
-            IFeedReader feedReader;
-            IFeedCreateResult result;
-            if (!fileName.StartsWith("http"))
-            {
-                feedReader = new FileFeedReader();
-                result = await feedReader.CreateFeed(fileName, feedName);
-            }
-            else
-            {
-                feedReader = new FeedReader();
-                result = await feedReader.CreateFeed(fileName, feedName);
-            }
-            Feed resultFeed = result.Feed;
-            foreach (var item in resultFeed.Items)
-            {
-                var text = item.Title.Substring(0, Math.Min(item.Title.Length, 10));
-                MethodInvoker addText = () => AddTextToMultiFeed(resultFeed.Name + ": " + text);
-                txtBoxMultiFeedBox.Invoke(addText);
-            }
+            //IFeedReader feedReader;
+            //IFeedCreateResult result;
+            //if (!fileName.StartsWith("http"))
+            //{
+            //    feedReader = new FileFeedReader();
+            //    result = await feedReader.CreateFeed(fileName, feedName);
+            //}
+            //else
+            //{
+            //    feedReader = new FeedReader();
+            //    result = await feedReader.CreateFeed(fileName, feedName);
+            //}
+            //Feed resultFeed = result.Feed;
+            //foreach (var item in resultFeed.Items)
+            //{
+            //    var text = item.Title.Substring(0, Math.Min(item.Title.Length, 10));
+            //    MethodInvoker addText = () => AddTextToMultiFeed(resultFeed.Name + ": " + text);
+            //    txtBoxMultiFeedBox.Invoke(addText);
+            //}
         }
 
         private async void HandleRssButtonClick(object sender, DoWorkEventArgs e)

@@ -2,13 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace dotrss.Database
 {
     public partial class FeedItem
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         public FeedItem()
         {
 
@@ -25,6 +28,24 @@ namespace dotrss.Database
             Link = link;
         }
 
+        public FeedItem(SyndicationItem item)
+        {
+            logger.Debug("item: " + item.ToString());
+            logger.Debug("Autoren: " + String.Join(",", item.Authors.Select(a => a.Name)));
+            logger.Debug("Titel: " + item.Title.Text);
+            logger.Debug("Zusammenfassung: " + item.Summary.Text);
+            if (item.Content != null)
+            {
+                var content = item.Content;
+                logger.Debug(content.Type);
+                logger.Debug("Text: " + (item.Content as TextSyndicationContent).Text);
+            }
+            else
+            {
+                logger.Debug("item.Content == null");
+            }
+        }
+
         /// <summary>
         /// Simple display
         /// </summary>
@@ -34,32 +55,4 @@ namespace dotrss.Database
             return String.Format("{0}: {1} ({2}) {3} {4}", Title, Description, PubDate.ToShortDateString(), Environment.NewLine, Body);
         }
     }
-    //public class FeedItem : IFeedItem
-    //{
-    //    public string ItemTitle { get; private set; }
-    //    public string ItemDescription { get; private set; }
-    //    public string ItemBody { get; private set; }
-    //    public DateTime? ItemDate { get; private set; }
-    //    public string IFeedItemId { get; private set; }
-    //    public string IFeedId { get; private set; }
-
-    //    public FeedItem(string title = "n/a", string description = "n/a", string body = "n/a", DateTime? date = null, string itemId = "", string feedId = "")
-    //    {
-    //        ItemTitle = title;
-    //        ItemDescription = description;
-    //        ItemBody = body;
-    //        ItemDate = date;
-    //        IFeedItemId = String.IsNullOrWhiteSpace(itemId) ? Guid.NewGuid().ToString() : itemId;
-    //        IFeedId = feedId;
-    //    }
-
-    //    /// <summary>
-    //    /// Simple display
-    //    /// </summary>
-    //    /// <returns>[Title]: [Description] ([Date]) \r\n [Body]</returns>
-    //    public override string ToString()
-    //    {
-    //        return String.Format("{0}: {1} ({2}) {3} {4}", ItemTitle, ItemDescription, ItemDate.HasValue ? ItemDate.Value.ToShortDateString() : "n/a", Environment.NewLine, ItemBody);
-    //    }
-    //}
 }

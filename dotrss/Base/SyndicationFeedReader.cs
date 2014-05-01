@@ -17,9 +17,20 @@ namespace dotrss.Base
         private static Logger logger = LogManager.GetCurrentClassLogger();
         public async Task<IFeedCreateResult> CreateFeed(string feedUri, string feedName)
         {
-            XmlReader reader = XmlReader.Create(feedUri);
-            SyndicationFeed synFeed = SyndicationFeed.Load(reader);
-            Feed newFeed = await Feed.Init(feedUri, feedName, Param.FeedTypeWeb);
+            try
+            {
+                XmlReader reader = XmlReader.Create(feedUri);
+                SyndicationFeed synFeed = SyndicationFeed.Load(reader);
+                foreach (var synItem in synFeed.Items.Take(5))
+                {
+                    FeedItem theItem = new FeedItem(synItem);
+                }
+                Feed newFeed = await Feed.Init(feedUri, feedName, Param.FeedTypeWeb);
+            }
+            catch (XmlException xmlEx)
+            {
+                logger.DebugException("xmlEx: ", xmlEx);
+            }
             return null;
         }
 
