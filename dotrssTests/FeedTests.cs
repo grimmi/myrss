@@ -54,9 +54,8 @@ namespace dotrss.Testing
             Feed newFeed = (await feedReader.CreateFeed(f, "Fefe Test-Feed")).Feed;
             var items = newFeed.Items;
             Assert.AreEqual(20, items.Count());
-            Assert.AreEqual(
-                "Aus der beliebten Reihe \"bei UNS ist Kernkraft SICHER\": Rauchwolken über dem AKW Fessenheim.Ursache sei kein Feuer gewesen, sondern ein Problem mit einem Sicherungsschalter in einem Nebengebäude des Maschinenraums von Block ein.Ich bin mir sicher, dass keine Gefahr für Anwohner und Mitarbeiter besteht.",
-                items.ElementAt(5).Title);
+            string titel = "Aus der beliebten Reihe \"bei UNS ist Kernkraft SICHER\": Rauchwolken über dem AKW Fessenheim.Ursache sei kein Feuer gewesen, sondern ein Problem mit einem Sicherungsschalter in einem Nebengebäude des Maschinenraums von Block ein.Ich bin mir sicher, dass keine Gefahr für Anwohner und Mitarbeiter besteht.";
+            Assert.AreEqual(titel.Substring(0, 75), items.ElementAt(5).Title);
         }
 
         [Test]

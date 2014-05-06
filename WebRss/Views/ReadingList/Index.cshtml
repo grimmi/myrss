@@ -1,0 +1,19 @@
+﻿@model IEnumerable<dotrss.Database.FeedItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@foreach (var item in Model)
+{
+    <span class="feedname">@item.Feed.Name</span><br />
+    <a href="@item.Link" class="feeditemtitle">@item.Title</a><br />
+    @:<span class="feedpubdate">[@item.PubDate.ToString("g")]</span> - <span class="feeddescription">@item.Description</span>
+    <hr class="itemdivider"/>
+}

@@ -37,9 +37,14 @@ namespace dotrss.Util
                 var titleElement = item.Descendants(Param.XMLTitleTag).FirstOrDefault();
                 var title = (titleElement != null) ? titleElement.Value : Param.PlaceHolderString;
                 var descriptionElement = item.Descendants(Param.XMLDescriptionTag).FirstOrDefault();
-                var description = (descriptionElement != null) ? descriptionElement.Value : Param.PlaceHolderString;
+                var description = (descriptionElement != null) ? descriptionElement.Value : String.Empty;
+                if (String.IsNullOrEmpty(description) && !String.IsNullOrEmpty(title))
+                {
+                    description = title;
+                    title = title.Substring(0, Math.Min(title.Length, 75));
+                }
                 var contentElement = item.Descendants().Where(e => e.Name.ToString().Contains(Param.XMLContentTag)).FirstOrDefault(); //(Param.XMLContentTag).FirstOrDefault();
-                var content = (contentElement != null) ? contentElement.Value : Param.PlaceHolderString;
+                var content = (contentElement != null) ? contentElement.Value : String.Empty;
                 var dateElement = item.Descendants(Param.XMLPubDateTag).FirstOrDefault();
                 var date = (dateElement != null) ? DateTime.Parse(dateElement.Value) : default(DateTime);
                 var guidElement = item.Descendants(Param.XMLGuidTag).FirstOrDefault();
